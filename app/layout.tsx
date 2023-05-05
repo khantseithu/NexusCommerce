@@ -18,7 +18,7 @@ export default async function RootLayout({
   console.log("session", session);
   return (
     <html lang="en">
-      <body className="mx-64">
+      <body className="md:mx-64">
         <Navbar expires={session?.expires as string} user={session?.user} />
         {children}
       </body>
