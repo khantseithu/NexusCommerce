@@ -6,9 +6,9 @@ import Image from "next/image";
 
 function Navbar({ user }: Session) {
   return (
-    <nav className="flex justify-between items-center py-6">
-      <h1>Navbar</h1>
-      <ul className="flex justify-between items-center gap-12">
+    <nav className="flex justify-between items-center py-6 mx-4">
+      <h1 className="uppercase font-bold text-black text-xl md:text-3xl">Nexus</h1>
+      <ul className="flex justify-between items-center gap-3 md:gap-12 ">
         <li>products</li>
         {!user && (
           <li>
