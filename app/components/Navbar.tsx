@@ -4,8 +4,12 @@ import { Session } from "next-auth";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import Cart from "./Cart";
+import { useCartStore } from "@/store";
+import { AiFillShopping } from "react-icons/ai";
 
 function Navbar({ user }: Session) {
+  const cartStore = useCartStore();
   return (
     <nav className="flex justify-between items-center py-6 mx-4">
       <Link href={"/"}>
@@ -14,7 +18,12 @@ function Navbar({ user }: Session) {
         </h1>
       </Link>
       <ul className="flex justify-between items-center gap-3 md:gap-12 ">
-        <li>products</li>
+        <li className="text-3xl relative cursor-pointer flex items-center">
+          <AiFillShopping />
+          <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex justify-center items-center text-xs">
+            {cartStore.cart.length}
+          </span>
+        </li>
         {!user && (
           <li>
             <button onClick={() => signIn()}>Sign in</button>
@@ -26,8 +35,8 @@ function Navbar({ user }: Session) {
               <Image
                 src={user?.image as string}
                 alt="user avatar"
-                width={50}
-                height={50}
+                width={36}
+                height={36}
                 className="rounded-full ring-1"
               />
             </li>
@@ -40,6 +49,7 @@ function Navbar({ user }: Session) {
           </>
         )}
       </ul>
+      {cartStore.isOpen && <Cart />}
     </nav>
   );
 }
