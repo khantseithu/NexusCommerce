@@ -18,7 +18,11 @@ function Navbar({ user }: Session) {
         </h1>
       </Link>
       <ul className="flex justify-between items-center gap-3 md:gap-12 ">
-        <li className="text-3xl relative cursor-pointer flex items-center">
+        {/* togggle the cart */}
+        <li
+          onClick={() => cartStore.toggleCart()}
+          className="text-3xl relative cursor-pointer flex items-center"
+        >
           <AiFillShopping />
           <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex justify-center items-center text-xs">
             {cartStore.cart.length}

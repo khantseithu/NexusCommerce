@@ -1,5 +1,6 @@
 import { SearchParamTypes } from "@/types/SearchParamTypes";
 import Image from "next/image";
+import AddCart from "./AddCart";
 
 export default async function Product({ searchParams }: SearchParamTypes) {
   return (
@@ -24,9 +25,7 @@ export default async function Product({ searchParams }: SearchParamTypes) {
               }).format(searchParams.unit_amount / 100)}
           </p>
 
-          <button className="w-full px-4 py-2 mt-4 font-bold text-white bg-gray-800 rounded hover:bg-gray-700 focus:outline-none focus:shadow-outline">
-            Add to Cart
-          </button>
+          <AddCart id={...searchParams} />
         </div>
       </div>
     </div>

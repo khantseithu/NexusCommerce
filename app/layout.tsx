@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar";
 import "./globals.css";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import Hydrate from "./components/Hydrate";
 
 export const metadata = {
   title: "Create Next App",
@@ -15,12 +16,14 @@ export default async function RootLayout({
 }) {
   // fetch the user
   const session = await getServerSession(authOptions);
-  console.log("session", session);
+  // console.log("session", session);
   return (
     <html lang="en">
       <body className="md:mx-64">
-        <Navbar expires={session?.expires as string} user={session?.user} />
-        {children}
+        <Hydrate>
+          <Navbar expires={session?.expires as string} user={session?.user} />
+          {children}
+        </Hydrate>
       </body>
     </html>
   );
