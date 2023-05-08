@@ -25,7 +25,7 @@ export default async function Product({ searchParams }: SearchParamTypes) {
               }).format(searchParams.unit_amount / 100)}
           </p>
 
-          <AddCart id={...searchParams} />
+          <AddCart {...searchParams} />
         </div>
       </div>
     </div>
