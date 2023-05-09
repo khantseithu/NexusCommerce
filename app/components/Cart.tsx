@@ -2,13 +2,7 @@
 
 import Image from "next/image";
 import { useCartStore } from "@/store";
-
-function formatPrice(price: number) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  }).format(price / 100);
-}
+import { IoAddCircleOutline, IoRemoveCircleOutline } from "react-icons/io5";
 
 export default function Cart() {
   const cartStore = useCartStore();
@@ -34,7 +28,35 @@ export default function Cart() {
             />
             <div>
               <h2>{item.name}</h2>
-              <h2>Quantity: {item.quantity}</h2>
+              <div className="flex gap-2">
+                <h2>Quantity: {item.quantity}</h2>
+                <button
+                  onClick={() =>
+                    cartStore.removeFromCart({
+                      id: item.id,
+                      image: item.image,
+                      name: item.name,
+                      unit_amount: item.unit_amount,
+                      quantity: (item.quantity as number) + 1,
+                    })
+                  }
+                >
+                  <IoRemoveCircleOutline />
+                </button>
+                <button
+                  onClick={() =>
+                    cartStore.addToCart({
+                      id: item.id,
+                      image: item.image,
+                      name: item.name,
+                      unit_amount: item.unit_amount,
+                      quantity: (item.quantity as number) + 1,
+                    })
+                  }
+                >
+                  <IoAddCircleOutline />
+                </button>
+              </div>
               <h2>
                 Price: {item.unit_amount && formatPrice(item.unit_amount)}
               </h2>
@@ -47,4 +69,11 @@ export default function Cart() {
       </div>
     </div>
   );
+}
+
+function formatPrice(price: number) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(price / 100);
 }
