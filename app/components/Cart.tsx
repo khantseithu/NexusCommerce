@@ -63,9 +63,17 @@ export default function Cart() {
             </div>
           </div>
         ))}
-        <button className="py-2 mt-4 bg-teal-700 w-full text-white rounded-lg">
-          Checkout
-        </button>
+        {cartStore.cart.length === 0 && (
+          <div className="flex flex-col items-center gap-12 text-2xl font-medium pt-44 opacity-75">
+            <h1>Your cart is empty 🥹</h1>
+            <Image src="/purchase.png" alt="basket" width={200} height={200} />
+          </div>
+        )}
+        {cartStore.cart.length > 0 && (
+          <button className="py-2 mt-4 bg-teal-700 w-full text-white rounded-lg">
+            Checkout
+          </button>
+        )}
       </div>
     </div>
   );
